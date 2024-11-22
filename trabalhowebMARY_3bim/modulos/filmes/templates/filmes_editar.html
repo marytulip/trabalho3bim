@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+        <div>
+            {{msg}}
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form action="/filmes/edit-save" method="post">
+        <div>
+            <label for="titulo">Titulo: </label>
+            <input type="text" name="titulo" id="titulo">
+        </div>
+        <div>
+            <label for="ano_lanc">Ano_lanc: </label>
+            <input type="text" name="ano_lanc" id="ano_lanc">
+        </div>
+        <div>
+            <label for="diretor">Diretor: </label>
+            <select name="id_diretor" id="diretor">
+                <option value=""></option>
+                {% for a in diretors %}
+                <option value="{{a.id_diretor}}">{{a.titulo}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <input type="hidden" name="id_filme" id="id_filme" value="{{filmes.id_filme}}">
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div>
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="adicionar">
+        <a href="/filmes/add">Adicionar</a>
+    </div>
+    <table>
+        <tr>
+            <th>Titulo</th>
+            <th>Ano_lanc</th>
+            <th>Diretor</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </tr>
+        {% for c in filmes %}
+        <tr>
+            <td>{{c.titulo}}</td>
+            <td>{{c.ano_lanc}}</td>
+            <td>{{c.diretor.titulo}}</td>
+            <td><a href="/filmes/edit/{{c.id_clube}}">[E]</a></td>
+            <td><a href="/filmes/remove/{{c.id_clube}}">[X]</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
